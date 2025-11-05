@@ -1,0 +1,43 @@
+name : ETL pipeline 
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+
+  extract-job:
+    runs-on: ubuntu-latest 
+
+  steps:
+
+    name : checkout code 
+    uses : actions/checkout@v2
+
+    name : Extract data from mysql 
+    run : python extract.py 
+
+  transform-job:
+    runs-on: ubuntu-latest
+
+  steps:
+
+    name: checkout code
+    uses: actions/checkout@v2
+
+    name: transform data from mysql 
+    run : python transform.py 
+
+  load-job:
+    runs-on : ubuntu-latest
+
+  steps:
+    name: checkout code
+    run: actions/checkout@v2
+
+    name : Load data from mysql 
+    run : python load.py
+
+    
+
